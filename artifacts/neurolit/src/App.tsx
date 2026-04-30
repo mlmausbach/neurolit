@@ -497,16 +497,16 @@ function FinalCTA() {
 function FAQ() {
   const faqs = [
     {
-      q: "O que é o Diagnóstico de Voo?",
-      a: "É uma avaliação gratuita que identifica os principais bloqueios no seu negócio e como eles se relacionam com a sua neurodivergência."
+      q: "O que é o mapeamento de perfil?",
+      a: "É uma etapa breve que acontece antes de você entrar no grupo de networking. Ele nos ajuda a entender seu perfil como empreendedor e garante que a comunidade seja formada pelas pessoas certas desde o início — quem realmente vive esse contexto."
     },
     {
       q: "Preciso ter diagnóstico médico de TDAH ou autismo?",
       a: "Não. Se você se identifica com os padrões que descrevemos, você é bem-vindo. O Neurolit é para quem se reconhece no problema, não para quem tem um laudo."
     },
     {
-      q: "A comunidade é paga?",
-      a: "O acesso básico é gratuito. Existem recursos premium para quem quer aprofundar, mas o essencial — a tribo, o diagnóstico, os frameworks básicos — você acessa sem pagar nada."
+      q: "Como funciona o acesso de Membro Fundador?",
+      a: "O acesso está aberto agora para um grupo inicial de membros fundadores — pessoas que entram na fase de construção e ajudam a moldar o ecossistema. Nesta fase, o acesso é gratuito. Não há plano básico nem premium separados: os Membros Fundadores têm acesso completo à tribo, aos frameworks e às conversas que importam."
     },
     {
       q: "Funciona para qualquer tipo de negócio?",
