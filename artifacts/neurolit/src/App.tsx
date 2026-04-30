@@ -379,7 +379,7 @@ function ThePlan() {
   const steps = [
     {
       title: "Identificar sua trava",
-      desc: "Faça o Diagnóstico de Voo e descubra o que está impedindo seu negócio de decolar."
+      desc: "Faça o mapeamento de perfil e descubra o que está impedindo seu negócio de decolar."
     },
     {
       title: "Conectar-se com a tribo",
