@@ -663,7 +663,7 @@ function Footer() {
         <div className="flex flex-col items-center md:items-start gap-4">
           <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
           <img src={logoVertical} alt="Neurolit" className="block md:hidden h-12 w-auto" />
-          <p className="text-muted-foreground font-mono text-sm">Murillo Bacchi · Estratégia e Visão</p>
+          <p className="text-muted-foreground font-mono text-sm">Neurolit · Estratégia e Visão</p>
         </div>
         <div className="flex gap-6">
           {["Instagram", "LinkedIn", "Twitter"].map((social) => (
