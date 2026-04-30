@@ -278,30 +278,30 @@ function Pillars() {
     {
       color: "bg-brand-orange",
       text: "text-white",
-      tag: "CALOR · VULNERABILIDADE",
-      body: "Um espaço seguro para falar o que",
-      italic: "ninguém entende lá fora."
+      tag: "DOR INTERNA · IDENTIDADE",
+      body: "Não é preguiça.",
+      italic: "Nunca foi."
     },
     {
       color: "bg-brand-yellow",
       text: "text-[#0C0C0C]",
-      tag: "PERTENCIMENTO · REDE",
-      body: "Networking com quem compartilha a mesma",
-      italic: "arquitetura cognitiva."
+      tag: "DOR EXTERNA · EXECUÇÃO",
+      body: "Métodos que funcionam quando você começa,",
+      italic: "trava e recomeça."
     },
     {
       color: "bg-brand-blue",
       text: "text-white",
-      tag: "DADOS · COLETIVO",
-      body: "Mapeamento coletivo das dores que",
-      italic: "travam nossa execução."
+      tag: "DOR FILOSÓFICA · SISTEMA",
+      body: "O ensino foi feito para um cérebro",
+      italic: "que não é o seu."
     },
     {
       color: "bg-brand-lime",
       text: "text-[#0C0C0C]",
-      tag: "CONSTRUÇÃO · FUNDAÇÃO",
-      body: "Seja um dos fundadores do ecossistema que vai",
-      italic: "mudar sua forma de gerir."
+      tag: "TRANSFORMAÇÃO · RESULTADO",
+      body: "Aqui o sistema se adapta",
+      italic: "ao seu cérebro."
     }
   ];
 
