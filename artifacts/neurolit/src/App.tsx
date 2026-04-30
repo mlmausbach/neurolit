@@ -150,7 +150,7 @@ function Hero() {
 const cartaLines = [
   {
     type: "p",
-    content: "Eu sou estrategista de marketing, mas também já travei mil vezes porque o método era neurotípico. Já olhei para planilhas por horas sem conseguir começar. Já perdi negócios porque meu cérebro se recusou a seguir o roteiro que todos diziam funcionar.",
+    content: "Eu sou estrategista de marketing, mas também já travei mil vezes porque o método era linear. Já olhei para planilhas por horas sem conseguir começar. Já perdi negócios porque meu cérebro se recusou a seguir o roteiro que todos diziam funcionar.",
     className: ""
   },
   {
