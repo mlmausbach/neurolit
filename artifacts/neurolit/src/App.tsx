@@ -25,7 +25,7 @@ function Navbar() {
         <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
       </div>
       <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6" data-testid="button-nav-cta">
-        Entrar na Comunidade
+        Quero ser um Membro Fundador
       </Button>
     </motion.header>
   );
@@ -55,13 +55,12 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          O empreendedorismo tradicional foi construído para um cérebro que{" "}
+          Pare de empreender{" "}
           <span className="relative whitespace-nowrap">
             <span className="relative z-10 text-transparent bg-clip-text" style={{ backgroundImage: `url(${gradientImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-              não é o seu.
+              no vácuo.
             </span>
-          </span>{" "}
-          E ninguém admite isso.
+          </span>
         </motion.h1>
 
         <motion.p 
@@ -70,7 +69,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          Neurolit: O ponto de encontro para empreendedores neurodivergentes que cansaram de tentar caber em métodos neurotípicos.
+          O Neurolit nasce para ser o fim do isolamento do empreendedor neurodivergente. Sem cursos prontos, sem promessas vazias. Apenas conexão real e sistemas que funcionam para o nosso cérebro.
         </motion.p>
 
         <motion.div 
@@ -81,7 +80,7 @@ function Hero() {
         >
           <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden" data-testid="button-hero-cta">
             <span className="relative z-10 flex items-center gap-2">
-              Fazer o Diagnóstico de Voo & Entrar na Comunidade
+              Quero ser um Membro Fundador
             </span>
           </Button>
         </motion.div>
@@ -90,7 +89,7 @@ function Hero() {
   );
 }
 
-function Manifesto() {
+function CartaDoFundador() {
   return (
     <section className="py-32 px-6 bg-card relative">
       <div className="max-w-3xl mx-auto">
@@ -100,31 +99,37 @@ function Manifesto() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-brand-yellow">O problema nunca foi você.</h2>
-          
+          <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-6">A Carta do Fundador</div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-brand-yellow">Uma carta honesta.</h2>
+
           <div className="space-y-8 text-lg md:text-xl text-foreground/90 font-medium leading-relaxed">
             <p>
-              Durante anos, empreendedores neurodivergentes tentaram encaixar seus negócios em sistemas criados por pessoas que acordam cedo, respondem e-mails imediatamente, mantêm planilhas organizadas e sentem prazer em rotinas previsíveis. E quando o sistema não funcionava, a culpa recaía sobre a pessoa.
+              Eu sou estrategista de marketing, mas também já travei mil vezes porque o método era neurotípico. Já olhei para planilhas por horas sem conseguir começar. Já perdi negócios porque meu cérebro se recusou a seguir o roteiro que todos diziam funcionar.
             </p>
-            
+
             <p className="text-muted-foreground italic border-l-2 border-border pl-6">
               "Você só precisa de mais disciplina." "Crie um hábito." "Siga o passo a passo."
             </p>
-            
+
             <p>
-              Mas a verdade, que poucos admitem, é que o problema nunca foi a falta de disciplina. Foi a incompatibilidade do método.
+              Cansei de ouvir isso. E cansei mais ainda de me sentir sozinho nesse processo. O isolamento do empreendedor neurodivergente não é falta de vontade — é falta de tribo.
             </p>
 
             <div className="my-16 py-12 px-8 border border-brand-orange/30 rounded-2xl bg-brand-orange/5 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-brand-orange" />
               <p className="text-2xl md:text-4xl font-bold text-foreground leading-tight">
-                "Você não é o problema. O sistema é que está quebrado."
+                "O Neurolit é onde vamos desenhar nossas próprias regras."
               </p>
             </div>
 
             <p>
-              O Neurolit existe para empreendedores que cansaram de se adaptar ao que nunca foi feito para eles. Aqui, construímos métodos que respeitam a forma como nossos cérebros realmente funcionam.
+              Não é mais um curso. Não é mais uma promessa vazia. É um ecossistema construído por quem vive isso, para quem vive isso. E ele começa agora, com os membros fundadores que vão ajudar a moldá-lo.
             </p>
+
+            <div className="pt-4 border-t border-border">
+              <p className="text-foreground font-semibold">Murillo Bacchi</p>
+              <p className="text-muted-foreground text-base">Fundador · Neurolit</p>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -169,29 +174,29 @@ function Pillars() {
       color: "bg-brand-orange",
       text: "text-white",
       tag: "CALOR · VULNERABILIDADE",
-      body: "Eu também desisti.",
-      italic: "Várias vezes."
+      body: "Um espaço seguro para falar o que",
+      italic: "ninguém entende lá fora."
     },
     {
       color: "bg-brand-yellow",
       text: "text-[#0C0C0C]",
-      tag: "ATENÇÃO · MANIFESTO",
-      body: "TDAH não é",
-      italic: "superpoder."
+      tag: "PERTENCIMENTO · REDE",
+      body: "Networking com quem compartilha a mesma",
+      italic: "arquitetura cognitiva."
     },
     {
       color: "bg-brand-blue",
       text: "text-white",
-      tag: "PROFUNDIDADE · DADO",
-      body: "29% dos empreendedores têm",
-      italic: "TDAH."
+      tag: "DADOS · COLETIVO",
+      body: "Mapeamento coletivo das dores que",
+      italic: "travam nossa execução."
     },
     {
       color: "bg-brand-lime",
       text: "text-[#0C0C0C]",
-      tag: "IGNIÇÃO · RESULTADO",
-      body: "Construa com o seu cérebro,",
-      italic: "não apesar dele."
+      tag: "CONSTRUÇÃO · FUNDAÇÃO",
+      body: "Seja um dos fundadores do ecossistema que vai",
+      italic: "mudar sua forma de gerir."
     }
   ];
 
@@ -317,12 +322,15 @@ function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-12 tracking-tight">Pronto para parar de lutar contra o seu próprio cérebro?</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Pronto para parar de empreender no vácuo?</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
+            Para entrar no grupo de networking, você passará por um breve mapeamento de perfil. É aqui que nossa construção começa.
+          </p>
           <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-10 py-8 text-xl w-full sm:w-auto mb-6" data-testid="button-final-cta">
-            Fazer o Diagnóstico de Voo & Entrar na Comunidade
+            Quero ser um Membro Fundador
           </Button>
           <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
-            Gratuito. Sem spam. Só o que importa.
+            Gratuito. Sem promessas vazias. Só conexão real.
           </p>
         </motion.div>
       </div>
@@ -386,7 +394,7 @@ function Footer() {
         <div className="flex flex-col items-center md:items-start gap-4">
           <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
           <img src={logoVertical} alt="Neurolit" className="block md:hidden h-12 w-auto" />
-          <p className="text-muted-foreground font-mono text-sm">Construído por um cérebro como o seu.</p>
+          <p className="text-muted-foreground font-mono text-sm">Murillo Bacchi · Estratégia e Visão</p>
         </div>
         <div className="flex gap-6">
           {["Instagram", "LinkedIn", "Twitter"].map((social) => (
@@ -397,7 +405,7 @@ function Footer() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-border text-center md:text-left text-sm text-muted-foreground/60">
-        © 2025 Neurolit. Todos os direitos reservados.
+        © 2026 Neurolit · Murillo Bacchi. Todos os direitos reservados.
       </div>
     </footer>
   );
@@ -409,7 +417,7 @@ function LandingPage() {
       <Navbar />
       <main>
         <Hero />
-        <Manifesto />
+        <CartaDoFundador />
         <Guide />
         <Pillars />
         <ThePlan />
