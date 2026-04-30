@@ -339,7 +339,7 @@ function Pillars() {
       text: "text-[#0C0C0C]",
       tag: "RESULTADO",
       body: "Aqui o sistema se adapta",
-      italic: "ao seu cérebro."
+      italic: "ao nosso cérebro."
     }
   ];
 
