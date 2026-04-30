@@ -317,8 +317,8 @@ function Pillars() {
       color: "bg-brand-orange",
       text: "text-white",
       tag: "IDENTIDADE",
-      body: "Não é preguiça.",
-      italic: "Nunca foi."
+      body: "Não é falta de disciplina.",
+      italic: "É incompatibilidade de sistema."
     },
     {
       color: "bg-brand-yellow",
@@ -331,15 +331,15 @@ function Pillars() {
       color: "bg-brand-blue",
       text: "text-white",
       tag: "SISTEMA",
-      body: "O ensino foi feito para um cérebro",
-      italic: "que não é o seu."
+      body: "O mercado foi desenhado para um padrão",
+      italic: "que não é o nosso."
     },
     {
       color: "bg-brand-lime",
       text: "text-[#0C0C0C]",
       tag: "RESULTADO",
-      body: "Aqui o sistema se adapta",
-      italic: "ao nosso cérebro."
+      body: "No Neurolit, a arquitetura de negócio",
+      italic: "se adapta ao nosso cérebro."
     }
   ];
 
