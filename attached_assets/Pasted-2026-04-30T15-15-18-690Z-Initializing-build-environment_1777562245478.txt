@@ -1,0 +1,104 @@
+2026-04-30T15:15:18.690Z	Initializing build environment...
+2026-04-30T15:15:25.786Z	Success: Finished initializing build environment
+2026-04-30T15:15:26.523Z	Cloning repository...
+2026-04-30T15:15:28.468Z	Restoring from dependencies cache
+2026-04-30T15:15:28.473Z	Restoring from build output cache
+2026-04-30T15:15:31.070Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@22.16.0
+2026-04-30T15:15:34.118Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-04-30T15:15:34.948Z	Scope: all 9 workspace projects
+2026-04-30T15:15:35.094Z	Lockfile is up to date, resolution step is skipped
+2026-04-30T15:15:35.216Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-04-30T15:15:35.325Z	Packages: +491
+2026-04-30T15:15:35.326Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-04-30T15:15:36.219Z	Progress: resolved 491, reused 0, downloaded 4, added 0
+2026-04-30T15:15:37.220Z	Progress: resolved 491, reused 0, downloaded 83, added 29
+2026-04-30T15:15:38.222Z	Progress: resolved 491, reused 0, downloaded 168, added 85
+2026-04-30T15:15:39.223Z	Progress: resolved 491, reused 0, downloaded 245, added 127
+2026-04-30T15:15:40.224Z	Progress: resolved 491, reused 0, downloaded 274, added 135
+2026-04-30T15:15:41.230Z	Progress: resolved 491, reused 0, downloaded 301, added 147
+2026-04-30T15:15:42.228Z	Progress: resolved 491, reused 0, downloaded 307, added 147
+2026-04-30T15:15:43.230Z	Progress: resolved 491, reused 0, downloaded 316, added 151
+2026-04-30T15:15:44.232Z	Progress: resolved 491, reused 0, downloaded 370, added 167
+2026-04-30T15:15:45.233Z	Progress: resolved 491, reused 0, downloaded 373, added 167
+2026-04-30T15:15:46.234Z	Progress: resolved 491, reused 0, downloaded 451, added 200
+2026-04-30T15:15:47.238Z	Progress: resolved 491, reused 0, downloaded 491, added 274
+2026-04-30T15:15:48.238Z	Progress: resolved 491, reused 0, downloaded 491, added 408
+2026-04-30T15:15:48.404Z	Progress: resolved 491, reused 0, downloaded 491, added 491, done
+2026-04-30T15:15:48.743Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-04-30T15:15:48.819Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-04-30T15:15:49.216Z	
+2026-04-30T15:15:49.217Z	devDependencies:
+2026-04-30T15:15:49.218Z	+ prettier 3.8.1
+2026-04-30T15:15:49.219Z	+ sharp 0.34.5
+2026-04-30T15:15:49.219Z	+ typescript 5.9.3
+2026-04-30T15:15:49.223Z	
+2026-04-30T15:15:49.273Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-04-30T15:15:49.291Z	. preinstall: Done
+2026-04-30T15:15:49.473Z	╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-04-30T15:15:49.475Z	│                                                                              │
+2026-04-30T15:15:49.476Z	│   Ignored build scripts: sharp@0.34.5.                                       │
+2026-04-30T15:15:49.476Z	│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-04-30T15:15:49.476Z	│   to run scripts.                                                            │
+2026-04-30T15:15:49.477Z	│                                                                              │
+2026-04-30T15:15:49.477Z	╰──────────────────────────────────────────────────────────────────────────────╯
+2026-04-30T15:15:49.495Z	Done in 15.1s using pnpm v10.26.1
+2026-04-30T15:15:49.796Z	Executing user build command: pnpm install --no-frozen-lockfile && pnpm --filter @workspace/neurolit run build
+2026-04-30T15:15:50.345Z	Scope: all 9 workspace projects
+2026-04-30T15:15:50.507Z	Lockfile is up to date, resolution step is skipped
+2026-04-30T15:15:50.605Z	Already up to date
+2026-04-30T15:15:52.010Z	
+2026-04-30T15:15:52.061Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-04-30T15:15:52.076Z	. preinstall: Done
+2026-04-30T15:15:52.251Z	╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-04-30T15:15:52.252Z	│                                                                              │
+2026-04-30T15:15:52.253Z	│   Ignored build scripts: sharp@0.34.5.                                       │
+2026-04-30T15:15:52.253Z	│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-04-30T15:15:52.253Z	│   to run scripts.                                                            │
+2026-04-30T15:15:52.253Z	│                                                                              │
+2026-04-30T15:15:52.254Z	╰──────────────────────────────────────────────────────────────────────────────╯
+2026-04-30T15:15:52.269Z	Done in 2.2s using pnpm v10.26.1
+2026-04-30T15:15:52.999Z	
+2026-04-30T15:15:53.000Z	> @workspace/neurolit@0.0.0 build /opt/buildhome/repo/artifacts/neurolit
+2026-04-30T15:15:53.001Z	> vite build --config vite.config.ts
+2026-04-30T15:15:53.001Z	
+2026-04-30T15:15:54.155Z	vite v7.3.2 building client environment for production...
+2026-04-30T15:15:54.312Z	transforming...
+2026-04-30T15:15:55.375Z	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-04-30T15:16:00.209Z	✓ 2173 modules transformed.
+2026-04-30T15:16:01.011Z	rendering chunks...
+2026-04-30T15:16:01.039Z	computing gzip size...
+2026-04-30T15:16:01.083Z	dist/public/index.html                                                             2.27 kB │ gzip:   0.80 kB
+2026-04-30T15:16:01.085Z	dist/public/assets/Gradiente_Neurolit_1777554171991-B_gprhhH.png                   7.52 kB
+2026-04-30T15:16:01.089Z	dist/public/assets/Horizontal-LOGO-NeurolitSEMTAG@2x_1777555071333-gIVUEZEK.png    9.52 kB
+2026-04-30T15:16:01.089Z	dist/public/assets/Vertical-LOGO-NeurolitSEMTAG@2x_1777554928828-BhH_-Z1j.png     15.92 kB
+2026-04-30T15:16:01.090Z	dist/public/assets/index-0o4RjVAi.css                                            102.54 kB │ gzip:  16.74 kB
+2026-04-30T15:16:01.090Z	dist/public/assets/index-Cl2eaixg.js                                             489.74 kB │ gzip: 158.10 kB
+2026-04-30T15:16:01.090Z	✓ built in 6.84s
+2026-04-30T15:16:01.210Z	Success: Build command completed
+2026-04-30T15:16:01.458Z	Executing user deploy command: npx wrangler pages deploy artifacts/neurolit/dist/public --project-name=neurolit
+2026-04-30T15:16:03.849Z	npm warn exec The following package was not found and will be installed: wrangler@4.86.0
+2026-04-30T15:16:22.506Z	
+2026-04-30T15:16:22.508Z	 ⛅️ wrangler 4.86.0
+2026-04-30T15:16:22.508Z	───────────────────
+2026-04-30T15:16:23.098Z	
+2026-04-30T15:16:23.229Z	✘ [ERROR] A request to the Cloudflare API (/accounts/f622038d58df5bd24467fdeebc0eba69/pages/projects/neurolit) failed.
+2026-04-30T15:16:23.229Z	
+2026-04-30T15:16:23.229Z	  Authentication error [code: 10000]
+2026-04-30T15:16:23.229Z	
+2026-04-30T15:16:23.229Z	
+2026-04-30T15:16:23.230Z	📎 It looks like you are authenticating Wrangler via a custom API token set in an environment variable.
+2026-04-30T15:16:23.230Z	Please ensure it has the correct permissions for this operation.
+2026-04-30T15:16:23.230Z	
+2026-04-30T15:16:23.244Z	Getting User settings...
+2026-04-30T15:16:24.267Z	👋 You are logged in with an User API Token, associated with the email mlmausbach@gmail.com.
+2026-04-30T15:16:24.270Z	ℹ️  The API Token is read from the CLOUDFLARE_API_TOKEN environment variable.
+2026-04-30T15:16:24.286Z	┌────────────────┬──────────────────────────────────┐
+2026-04-30T15:16:24.287Z	│ Account Name   │ Account ID                       │
+2026-04-30T15:16:24.288Z	├────────────────┼──────────────────────────────────┤
+2026-04-30T15:16:24.290Z	│ Murillo Bacchi │ f622038d58df5bd24467fdeebc0eba69 │
+2026-04-30T15:16:24.291Z	└────────────────┴──────────────────────────────────┘
+2026-04-30T15:16:24.291Z	🔓 To see token permissions visit https://dash.cloudflare.com/profile/api-tokens.
+2026-04-30T15:16:24.628Z	🎢 Membership roles in "Murillo Bacchi": Contact account super admin to change your permissions.
+2026-04-30T15:16:24.629Z	- Super Administrator - All Privileges
+2026-04-30T15:16:24.631Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-04-30_15-16-22_092.log"
+2026-04-30T15:16:24.787Z	Failed: error occurred while running deploy command
