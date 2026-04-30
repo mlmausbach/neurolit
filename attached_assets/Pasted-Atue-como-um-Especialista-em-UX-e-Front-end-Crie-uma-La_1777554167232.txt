@@ -1,0 +1,43 @@
+Atue como um Especialista em UX e Front-end. Crie uma Landing Page no estilo Advertorial/Manifesto para o Neurolit, uma comunidade de empreendedores neurodivergentes liderada por Murillo Bacchi.
+
+1. Identidade Visual e Atmosfera:
+
+Fundo: Dark Mode profundo e limpo.
+
+Acentos: Use as cores das imagens 'Gradiente_Neurolit.png' e 'Paleta_Neurolit.png' para botões, bordas de cards e destaques de texto.
+
+Vibe: Estética técnica, porém humana; minimalista e organizada para evitar sobrecarga sensorial.
+
+2. Estrutura Narrative (Storybrand):
+
+Hero Section: Texto de impacto: 'O empreendedorismo tradicional foi construído para um cérebro que não é o seu. E ninguém admite isso.' Subtítulo: 'Neurolit: O ponto de encontro para empreendedores neurodivergentes que cansaram de tentar caber em métodos neurotípicos.'
+
+O Manifesto (Advertorial): Um bloco de texto corrido, com tipografia elegante, explicando que o problema nunca foi a falta de disciplina, mas a incompatibilidade do método. Destaque a frase: 'Você não é o problema. O sistema é que está quebrado.'
+
+Seção 'O Guia': Apresente Murillo Bacchi. Use um tom de vulnerabilidade honesta: 'Analista de sistemas e estrategista que constrói frameworks porque precisa deles para sobreviver. Não falo de cima, falo de dentro.'
+
+Os 4 Pilares (Cards Coloridos): Use as cores da imagem de referência para criar 4 cards grandes com:
+
+Laranja (Vulnerabilidade): 'Eu também desisti. Várias vezes.'
+
+Amarelo (Manifesto): 'TDAH não é superpoder.'
+
+Azul (Dado): '29% dos empreendedores têm TDAH.'
+
+Verde (Ignition): 'Construa com o seu cérebro, não apesar dele.'
+
+3. Fluxo de Conversão (Community Focus):
+
+CTA Principal: Um botão de destaque: 'Fazer o Diagnóstico de Voo & Entrar na Comunidade'.
+
+O Plano: Três passos simples: 1. Identificar sua trava; 2. Conectar-se com a tribo; 3. Construir o novo padrão.
+
+Seção de 'Fracasso vs Sucesso': Um comparativo visual entre 'Continuar tentando o método neurotípico (Foguete no chão)' vs 'Pertencer a uma comunidade que fala sua língua (Negócio sustentável)'.
+
+4. Especificações Técnicas:
+
+Use React + Tailwind CSS.
+
+Garanta que o layout seja focado em leitura (espaçamento amplo).
+
+Inclua uma seção de FAQ no final focada em dúvidas sobre a comunidade.
