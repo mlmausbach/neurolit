@@ -1,5 +1,6 @@
 import { Switch, Route, Router as WouterRouter, Link } from "wouter";
 import FormPage from "./FormPage";
+import AdminPage from "./AdminPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -707,6 +708,7 @@ function App() {
           <Switch>
             <Route path="/" component={LandingPage} />
             <Route path="/entrar" component={FormPage} />
+            <Route path="/admin" component={AdminPage} />
             <Route path="/:rest*" component={LandingPage} />
           </Switch>
         </WouterRouter>
