@@ -2,9 +2,10 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValue, useSpring, animate } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { useRef, useEffect } from "react";
 
 import gradientImg from "@assets/Gradiente_Neurolit_1777554171991.png";
 import logoVertical from "@assets/Vertical-LOGO-NeurolitSEMTAG@2x_1777554928828.png";
@@ -31,11 +32,43 @@ function Navbar() {
   );
 }
 
+function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const count = useMotionValue(0);
+  const rounded = useSpring(count, { stiffness: 60, damping: 20 });
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, target, { duration: 1.8, ease: "easeOut" });
+    return controls.stop;
+  }, [inView, target, count]);
+
+  useEffect(() => {
+    const unsubscribe = rounded.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = Math.round(latest) + suffix;
+      }
+    });
+    return unsubscribe;
+  }, [rounded, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
+}
+
 function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center pt-24 px-6 overflow-hidden">
-      {/* Background gradient blur */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-blue/20 blur-[120px] rounded-full pointer-events-none" />
+    <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-center pt-24 px-6 overflow-hidden">
+      {/* Parallax background gradient */}
+      <motion.div
+        style={{ y: bgY, opacity: bgOpacity }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-blue/20 blur-[120px] rounded-full pointer-events-none"
+      />
       
       <div className="max-w-5xl mx-auto w-full relative z-10">
         <motion.div
@@ -45,7 +78,9 @@ function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8">
             <div className="w-2 h-2 rounded-full bg-brand-lime" />
-            <span className="text-sm font-mono text-muted-foreground uppercase tracking-wider">Dado do sistema: 29% dos empreendedores têm TDAH.</span>
+            <span className="text-sm font-mono text-muted-foreground uppercase tracking-wider">
+              Dado do sistema: <AnimatedCounter target={29} suffix="%" /> dos empreendedores têm TDAH.
+            </span>
           </div>
         </motion.div>
 
@@ -89,6 +124,100 @@ function Hero() {
   );
 }
 
+const cartaLines = [
+  {
+    type: "p",
+    content: "Eu sou estrategista de marketing, mas também já travei mil vezes porque o método era neurotípico. Já olhei para planilhas por horas sem conseguir começar. Já perdi negócios porque meu cérebro se recusou a seguir o roteiro que todos diziam funcionar.",
+    className: ""
+  },
+  {
+    type: "blockquote",
+    content: '"Você só precisa de mais disciplina." "Crie um hábito." "Siga o passo a passo."',
+    className: "text-muted-foreground italic border-l-2 border-border pl-6"
+  },
+  {
+    type: "p",
+    content: "Cansei de ouvir isso. E cansei mais ainda de me sentir sozinho nesse processo. O isolamento do empreendedor neurodivergente não é falta de vontade — é falta de tribo.",
+    className: ""
+  },
+  {
+    type: "highlight",
+    content: '"O Neurolit é onde vamos desenhar nossas próprias regras."',
+    className: ""
+  },
+  {
+    type: "p",
+    content: "Não é mais um curso. Não é mais uma promessa vazia. É um ecossistema construído por quem vive isso, para quem vive isso. E ele começa agora, com os membros fundadores que vão ajudar a moldá-lo.",
+    className: ""
+  },
+  {
+    type: "signature",
+    content: "",
+    className: ""
+  }
+];
+
+const lineVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+  })
+};
+
+function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  if (line.type === "highlight") {
+    return (
+      <motion.div
+        ref={ref}
+        custom={index}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={lineVariants}
+        className="my-16 py-12 px-8 border border-brand-orange/30 rounded-2xl bg-brand-orange/5 relative overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 w-1 h-full bg-brand-orange" />
+        <p className="text-2xl md:text-4xl font-bold text-foreground leading-tight">
+          {line.content}
+        </p>
+      </motion.div>
+    );
+  }
+
+  if (line.type === "signature") {
+    return (
+      <motion.div
+        ref={ref}
+        custom={index}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={lineVariants}
+        className="pt-4 border-t border-border"
+      >
+        <p className="text-foreground font-semibold">Murillo Bacchi</p>
+        <p className="text-muted-foreground text-base">Fundador · Neurolit</p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.p
+      ref={ref}
+      custom={index}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={lineVariants}
+      className={`text-lg md:text-xl text-foreground/90 font-medium leading-relaxed ${line.className}`}
+    >
+      {line.content}
+    </motion.p>
+  );
+}
+
 function CartaDoFundador() {
   return (
     <section className="py-32 px-6 bg-card relative">
@@ -101,37 +230,13 @@ function CartaDoFundador() {
         >
           <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-6">A Carta do Fundador</div>
           <h2 className="text-3xl md:text-5xl font-bold mb-12 text-brand-yellow">Uma carta honesta.</h2>
-
-          <div className="space-y-8 text-lg md:text-xl text-foreground/90 font-medium leading-relaxed">
-            <p>
-              Eu sou estrategista de marketing, mas também já travei mil vezes porque o método era neurotípico. Já olhei para planilhas por horas sem conseguir começar. Já perdi negócios porque meu cérebro se recusou a seguir o roteiro que todos diziam funcionar.
-            </p>
-
-            <p className="text-muted-foreground italic border-l-2 border-border pl-6">
-              "Você só precisa de mais disciplina." "Crie um hábito." "Siga o passo a passo."
-            </p>
-
-            <p>
-              Cansei de ouvir isso. E cansei mais ainda de me sentir sozinho nesse processo. O isolamento do empreendedor neurodivergente não é falta de vontade — é falta de tribo.
-            </p>
-
-            <div className="my-16 py-12 px-8 border border-brand-orange/30 rounded-2xl bg-brand-orange/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-brand-orange" />
-              <p className="text-2xl md:text-4xl font-bold text-foreground leading-tight">
-                "O Neurolit é onde vamos desenhar nossas próprias regras."
-              </p>
-            </div>
-
-            <p>
-              Não é mais um curso. Não é mais uma promessa vazia. É um ecossistema construído por quem vive isso, para quem vive isso. E ele começa agora, com os membros fundadores que vão ajudar a moldá-lo.
-            </p>
-
-            <div className="pt-4 border-t border-border">
-              <p className="text-foreground font-semibold">Murillo Bacchi</p>
-              <p className="text-muted-foreground text-base">Fundador · Neurolit</p>
-            </div>
-          </div>
         </motion.div>
+
+        <div className="space-y-8">
+          {cartaLines.map((line, i) => (
+            <CartaLine key={i} line={line} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -210,7 +315,12 @@ function Pillars() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className={`${card.color} ${card.text} p-12 md:p-16 rounded-3xl flex flex-col justify-between min-h-[360px]`}
+            whileHover={{
+              y: -8,
+              boxShadow: "0 24px 48px rgba(0,0,0,0.35)",
+              transition: { duration: 0.25, ease: "easeOut" }
+            }}
+            className={`${card.color} ${card.text} p-12 md:p-16 rounded-3xl flex flex-col justify-between min-h-[360px] cursor-default`}
           >
             <div className="text-sm font-mono uppercase tracking-widest opacity-80 mb-12">
               {card.tag}
