@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response, type NextFunction } from "express";
 import { db, candidaturasTable, insertCandidaturaSchema } from "@workspace/db";
 import { logger } from "../lib/logger";
+import { sendNewApplicationAlert } from "../lib/email";
 
 const router: IRouter = Router();
 
@@ -39,6 +40,18 @@ router.post("/candidatura", async (req, res) => {
       .returning({ id: candidaturasTable.id, criadoEm: candidaturasTable.criadoEm });
 
     logger.info({ id: candidatura.id, email: parsed.data.email }, "Nova candidatura recebida");
+
+    // Fire-and-forget: email failures must not block or fail the submission response.
+    sendNewApplicationAlert({
+      nome: parsed.data.nome,
+      email: parsed.data.email,
+      whatsapp: parsed.data.whatsapp,
+      empresa: parsed.data.empresa,
+      estagio: parsed.data.estagio,
+      porqueFundador: parsed.data.porqueFundador,
+    }).catch((err) => {
+      logger.error({ err }, "Erro inesperado ao enviar email de notificação");
+    });
 
     res.status(201).json({ success: true, id: candidatura.id });
   } catch (err) {
