@@ -2,16 +2,28 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValue, useSpring, animate } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValue, useSpring, animate, useReducedMotion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import gradientImg from "@assets/Gradiente_Neurolit_1777554171991.png";
 import logoVertical from "@assets/Vertical-LOGO-NeurolitSEMTAG@2x_1777554928828.png";
 import logoHorizontal from "@assets/Horizontal-LOGO-NeurolitSEMTAG@2x_1777555071333.png";
 
 const queryClient = new QueryClient();
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handleChange);
+    return () => mq.removeEventListener("change", handleChange);
+  }, []);
+  return isMobile;
+}
 
 function Navbar() {
   return (
@@ -34,7 +46,7 @@ function Navbar() {
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-30px" });
   const count = useMotionValue(0);
   const rounded = useSpring(count, { stiffness: 60, damping: 20 });
 
@@ -57,24 +69,32 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 }
 
 function Hero() {
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+  const disableParallax = isMobile || prefersReducedMotion;
+
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const entryTransition = prefersReducedMotion
+    ? { duration: 0.15 }
+    : { duration: 0.7, ease: "easeOut" };
+
   return (
     <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-center pt-24 px-6 overflow-hidden">
-      {/* Parallax background gradient */}
+      {/* Parallax background gradient – disabled on mobile to prevent layout thrash */}
       <motion.div
-        style={{ y: bgY, opacity: bgOpacity }}
+        style={disableParallax ? {} : { y: bgY, opacity: bgOpacity, willChange: "transform, opacity" }}
         className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-blue/20 blur-[120px] rounded-full pointer-events-none"
       />
       
       <div className="max-w-5xl mx-auto w-full relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.1 }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8">
             <div className="w-2 h-2 rounded-full bg-brand-lime" />
@@ -86,9 +106,10 @@ function Hero() {
 
         <motion.h1 
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] mb-8 text-foreground"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.2 }}
+          style={{ willChange: "opacity, transform" }}
         >
           Pare de empreender{" "}
           <span className="relative whitespace-nowrap">
@@ -100,18 +121,20 @@ function Hero() {
 
         <motion.p 
           className="text-xl md:text-2xl text-muted-foreground max-w-3xl mb-12 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.3 }}
+          style={{ willChange: "opacity, transform" }}
         >
           O Neurolit nasce para ser o fim do isolamento do empreendedor neurodivergente. Sem cursos prontos, sem promessas vazias. Apenas conexão real e sistemas que funcionam para o nosso cérebro.
         </motion.p>
 
         <motion.div 
           className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.4 }}
+          style={{ willChange: "opacity, transform" }}
         >
           <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden" data-testid="button-hero-cta">
             <span className="relative z-10 flex items-center gap-2">
@@ -166,9 +189,16 @@ const lineVariants = {
   })
 };
 
+const lineVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } }
+};
+
 function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number }) {
+  const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-30px" });
+  const variants = prefersReducedMotion ? lineVariantsReduced : lineVariants;
 
   if (line.type === "highlight") {
     return (
@@ -177,7 +207,8 @@ function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number 
         custom={index}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={lineVariants}
+        variants={variants}
+        style={{ willChange: "opacity, transform" }}
         className="my-16 py-12 px-8 border border-brand-orange/30 rounded-2xl bg-brand-orange/5 relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-1 h-full bg-brand-orange" />
@@ -195,7 +226,8 @@ function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number 
         custom={index}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        variants={lineVariants}
+        variants={variants}
+        style={{ willChange: "opacity, transform" }}
         className="pt-4 border-t border-border"
       >
         <p className="text-foreground font-semibold">Murillo Bacchi</p>
@@ -210,7 +242,8 @@ function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number 
       custom={index}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      variants={lineVariants}
+      variants={variants}
+      style={{ willChange: "opacity, transform" }}
       className={`text-lg md:text-xl text-foreground/90 font-medium leading-relaxed ${line.className}`}
     >
       {line.content}
@@ -219,14 +252,16 @@ function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number 
 }
 
 function CartaDoFundador() {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <section className="py-32 px-6 bg-card relative">
       <div className="max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.8 }}
+          style={{ willChange: "opacity, transform" }}
         >
           <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-6">A Carta do Fundador</div>
           <h2 className="text-3xl md:text-5xl font-bold mb-12 text-brand-yellow">Uma carta honesta.</h2>
@@ -243,14 +278,16 @@ function CartaDoFundador() {
 }
 
 function Guide() {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <section className="py-32 px-6 border-t border-border">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.8 }}
+          style={{ willChange: "opacity, transform" }}
           className="grid md:grid-cols-[1fr_2fr] gap-12 md:gap-24"
         >
           <div>
@@ -274,6 +311,7 @@ function Guide() {
 }
 
 function Pillars() {
+  const prefersReducedMotion = useReducedMotion();
   const cards = [
     {
       color: "bg-brand-orange",
@@ -311,15 +349,16 @@ function Pillars() {
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            whileHover={{
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, delay: prefersReducedMotion ? 0 : idx * 0.1 }}
+            whileHover={prefersReducedMotion ? undefined : {
               y: -8,
               boxShadow: "0 24px 48px rgba(0,0,0,0.35)",
               transition: { duration: 0.25, ease: "easeOut" }
             }}
+            style={{ willChange: "opacity, transform" }}
             className={`${card.color} ${card.text} p-12 md:p-16 rounded-3xl flex flex-col justify-between min-h-[360px] cursor-default`}
           >
             <div className="text-sm font-mono uppercase tracking-widest opacity-80 mb-12">
@@ -336,6 +375,7 @@ function Pillars() {
 }
 
 function ThePlan() {
+  const prefersReducedMotion = useReducedMotion();
   const steps = [
     {
       title: "Identificar sua trava",
@@ -360,10 +400,11 @@ function ThePlan() {
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, delay: prefersReducedMotion ? 0 : idx * 0.1 }}
+              style={{ willChange: "opacity, transform" }}
               className="p-8 border border-border rounded-2xl bg-background hover:border-brand-blue/50 transition-colors"
             >
               <div className="text-5xl font-bold text-border mb-6">0{idx + 1}</div>
@@ -378,15 +419,17 @@ function ThePlan() {
 }
 
 function Comparison() {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <section className="py-32 px-6 max-w-6xl mx-auto">
       <div className="grid md:grid-cols-2 gap-8">
         <motion.div 
           className="p-8 md:p-12 rounded-3xl border border-destructive/20 bg-destructive/5"
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
+          style={{ willChange: "opacity, transform" }}
         >
           <h3 className="text-xl font-bold mb-8 text-destructive/80">Continuar tentando o método neurotípico</h3>
           <ul className="space-y-6">
@@ -401,10 +444,11 @@ function Comparison() {
 
         <motion.div 
           className="p-8 md:p-12 rounded-3xl border border-brand-lime/30 bg-brand-lime/5 relative overflow-hidden"
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
+          style={{ willChange: "opacity, transform" }}
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-lime/10 blur-[60px] rounded-full pointer-events-none" />
           <h3 className="text-xl font-bold mb-8 text-brand-lime relative z-10">Pertencer a uma comunidade que fala sua língua</h3>
@@ -423,14 +467,16 @@ function Comparison() {
 }
 
 function FinalCTA() {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <section className="py-32 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
+          style={{ willChange: "opacity, transform" }}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Pronto para parar de empreender no vácuo?</h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
