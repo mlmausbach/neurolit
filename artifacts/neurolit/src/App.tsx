@@ -7,7 +7,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 
 import gradientImg from "@assets/Gradiente_Neurolit_1777554171991.png";
-import logoImg from "@assets/neurolit-logo-transparent.png";
+import logoVertical from "@assets/Vertical-LOGO-NeurolitSEMTAG@2x_1777554928828.png";
+import logoHorizontal from "@assets/Horizontal-LOGO-NeurolitSEMTAG@2x_1777555071333.png";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +20,9 @@ function Navbar() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-md border-b border-border"
     >
-      <div className="flex items-center gap-2">
-        <img src={logoImg} alt="Neurolit" className="h-10 w-auto" />
+      <div className="flex items-center">
+        <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
+        <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
       </div>
       <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6" data-testid="button-nav-cta">
         Entrar na Comunidade
@@ -382,7 +384,8 @@ function Footer() {
       />
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex flex-col items-center md:items-start gap-4">
-          <img src={logoImg} alt="Neurolit" className="h-10 w-auto" />
+          <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
+          <img src={logoVertical} alt="Neurolit" className="block md:hidden h-12 w-auto" />
           <p className="text-muted-foreground font-mono text-sm">Construído por um cérebro como o seu.</p>
         </div>
         <div className="flex gap-6">
