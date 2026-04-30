@@ -1,4 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, Link } from "wouter";
+import FormPage from "./FormPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -37,9 +38,11 @@ function Navbar() {
         <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
         <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
       </div>
-      <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6 cursor-pointer" data-testid="button-nav-cta">
-        Quero ser um Membro Fundador
-      </Button>
+      <Link href="/entrar">
+        <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6 cursor-pointer" data-testid="button-nav-cta">
+          Quero ser um Membro Fundador
+        </Button>
+      </Link>
     </motion.header>
   );
 }
@@ -136,11 +139,13 @@ function Hero() {
           transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.4 }}
           style={{ willChange: "opacity, transform" }}
         >
-          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden cursor-pointer" data-testid="button-hero-cta">
-            <span className="relative z-10 flex items-center gap-2">
-              Quero ser um Membro Fundador
-            </span>
-          </Button>
+          <Link href="/entrar" className="w-full sm:w-auto">
+            <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden cursor-pointer" data-testid="button-hero-cta">
+              <span className="relative z-10 flex items-center gap-2">
+                Quero ser um Membro Fundador
+              </span>
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -587,9 +592,11 @@ function FinalCTA() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
             Para entrar no grupo de networking, você passará por um breve mapeamento de perfil. É aqui que nossa construção começa.
           </p>
-          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-10 py-8 text-xl w-full sm:w-auto mb-6 cursor-pointer" data-testid="button-final-cta">
-            Quero ser um Membro Fundador
-          </Button>
+          <Link href="/entrar" className="w-full sm:w-auto block mb-6">
+            <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-10 py-8 text-xl w-full sm:w-auto cursor-pointer" data-testid="button-final-cta">
+              Quero ser um Membro Fundador
+            </Button>
+          </Link>
           <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
             Gratuito. Sem promessas vazias. Só conexão real.
           </p>
@@ -699,6 +706,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Switch>
             <Route path="/" component={LandingPage} />
+            <Route path="/entrar" component={FormPage} />
             <Route path="/:rest*" component={LandingPage} />
           </Switch>
         </WouterRouter>
