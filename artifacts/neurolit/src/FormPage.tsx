@@ -563,6 +563,8 @@ export default function FormPage() {
   const [data, setData] = useState<FormData>(INITIAL);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const TOTAL = 5;
 
   const handleChange = (key: keyof FormData, value: string | number) => {
@@ -575,7 +577,7 @@ export default function FormPage() {
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
 
-  const goNext = () => {
+  const goNext = async () => {
     const e = validateStep(step, data);
     if (Object.keys(e).length > 0) {
       setErrors(e);
@@ -586,8 +588,28 @@ export default function FormPage() {
       setStep((s) => s + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setIsSubmitting(true);
+      setSubmitError(null);
+      try {
+        const payload = {
+          ...data,
+          cerebro: data.cerebro.join(", "),
+        };
+        const res = await fetch("/api/candidatura", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          throw new Error(`Erro ${res.status}`);
+        }
+        setSubmitted(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch {
+        setSubmitError("Não foi possível enviar sua candidatura. Tente novamente.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -681,12 +703,16 @@ export default function FormPage() {
                 )}
                 <Button
                   onClick={goNext}
-                  className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-base cursor-pointer"
+                  disabled={isSubmitting}
+                  className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-base cursor-pointer disabled:opacity-60"
                   data-testid={step === TOTAL ? "button-submit" : "button-next"}
                 >
-                  {step === TOTAL ? "Enviar candidatura" : "Próximo →"}
+                  {isSubmitting ? "Enviando..." : step === TOTAL ? "Enviar candidatura" : "Próximo →"}
                 </Button>
               </div>
+              {submitError && (
+                <p className="text-sm text-destructive font-mono text-center mt-4">{submitError}</p>
+              )}
             </>
           )}
         </div>
