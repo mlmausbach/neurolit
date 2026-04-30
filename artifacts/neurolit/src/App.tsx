@@ -278,28 +278,28 @@ function Pillars() {
     {
       color: "bg-brand-orange",
       text: "text-white",
-      tag: "DOR INTERNA · IDENTIDADE",
+      tag: "IDENTIDADE",
       body: "Não é preguiça.",
       italic: "Nunca foi."
     },
     {
       color: "bg-brand-yellow",
       text: "text-[#0C0C0C]",
-      tag: "DOR EXTERNA · EXECUÇÃO",
+      tag: "EXECUÇÃO",
       body: "Métodos que funcionam quando você começa,",
       italic: "trava e recomeça."
     },
     {
       color: "bg-brand-blue",
       text: "text-white",
-      tag: "DOR FILOSÓFICA · SISTEMA",
+      tag: "SISTEMA",
       body: "O ensino foi feito para um cérebro",
       italic: "que não é o seu."
     },
     {
       color: "bg-brand-lime",
       text: "text-[#0C0C0C]",
-      tag: "TRANSFORMAÇÃO · RESULTADO",
+      tag: "RESULTADO",
       body: "Aqui o sistema se adapta",
       italic: "ao seu cérebro."
     }
