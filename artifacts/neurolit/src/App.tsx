@@ -37,7 +37,7 @@ function Navbar() {
         <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
         <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
       </div>
-      <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6" data-testid="button-nav-cta">
+      <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6 cursor-pointer" data-testid="button-nav-cta">
         Quero ser um Membro Fundador
       </Button>
     </motion.header>
@@ -126,7 +126,7 @@ function Hero() {
           transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.3 }}
           style={{ willChange: "opacity, transform" }}
         >
-          O Neurolit nasce para ser o fim do isolamento do empreendedor neurodivergente. Sem cursos prontos, sem promessas vazias. Apenas conexão real e sistemas que funcionam para o nosso cérebro.
+          O Neurolit nasce para ser o fim do isolamento da mente não linear empreendedora. Sem cursos prontos, sem promessas vazias. Apenas conexão real e sistemas que funcionam para o nosso cérebro.
         </motion.p>
 
         <motion.div 
@@ -136,7 +136,7 @@ function Hero() {
           transition={{ ...entryTransition, delay: prefersReducedMotion ? 0 : 0.4 }}
           style={{ willChange: "opacity, transform" }}
         >
-          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden" data-testid="button-hero-cta">
+          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden cursor-pointer" data-testid="button-hero-cta">
             <span className="relative z-10 flex items-center gap-2">
               Quero ser um Membro Fundador
             </span>
@@ -160,7 +160,7 @@ const cartaLines = [
   },
   {
     type: "p",
-    content: "Cansei de ouvir isso. E cansei mais ainda de me sentir sozinho nesse processo. O isolamento do empreendedor neurodivergente não é falta de vontade — é falta de tribo.",
+    content: "Cansei de ouvir isso. E cansei mais ainda de me sentir sozinho nesse processo. O isolamento da mente não linear empreendedora não é falta de vontade — é falta de tribo.",
     className: ""
   },
   {
@@ -387,7 +387,7 @@ function ThePlan() {
     },
     {
       title: "Construir o novo padrão",
-      desc: "Acesse frameworks e estratégias construídos para cérebros neurodivergentes."
+      desc: "Acesse frameworks e estratégias construídos para mentes não-lineares."
     }
   ];
 
@@ -431,7 +431,7 @@ function Comparison() {
           transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
           style={{ willChange: "opacity, transform" }}
         >
-          <h3 className="text-xl font-bold mb-8 text-destructive/80">Continuar tentando o método neurotípico</h3>
+          <h3 className="text-xl font-bold mb-8 text-destructive/80">Continuar tentando o método linear</h3>
           <ul className="space-y-6">
             {["Foguete no chão", "Sentimento de incompetência", "Ciclos de burnout", "Métodos que nunca encaixam"].map((item, i) => (
               <li key={i} className="flex items-center gap-4 text-muted-foreground">
@@ -466,6 +466,111 @@ function Comparison() {
   );
 }
 
+function ForQuem() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const paraQuemE = [
+    {
+      label: "Empreendedores e Visionários",
+      desc: "Pessoas de 25 a 45 anos que já possuem ou estão construindo um negócio."
+    },
+    {
+      label: "Mentes Não Lineares",
+      desc: "Quem possui TDAH, autismo, dupla excepcionalidade (2e) ou simplesmente não se encaixa nos métodos tradicionais de execução."
+    },
+    {
+      label: "Busca por Sistemas",
+      desc: "Quem entende que o problema não é a falta de capacidade, mas a incompatibilidade do método e busca uma nova arquitetura de trabalho."
+    }
+  ];
+
+  const paraQuemNaoE = [
+    {
+      label: "Busca por Cura ou Conselhos Médicos",
+      desc: "O foco é business e estratégia, não tratamento clínico ou terapêutico."
+    },
+    {
+      label: "Amantes de Métodos Lineares",
+      desc: "Pessoas que buscam fórmulas mágicas e rígidas de 'passo a passo' tradicionais que ignoram o funcionamento cerebral."
+    },
+    {
+      label: "Espectadores Passivos",
+      desc: "Quem não deseja compartilhar desafios ou cocriar a base da comunidade."
+    }
+  ];
+
+  return (
+    <section className="py-32 px-6 bg-card border-t border-border">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: prefersReducedMotion ? 0.2 : 0.7 }}
+          style={{ willChange: "opacity, transform" }}
+          className="text-center mb-16"
+        >
+          <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-4">Clareza antes de começar</div>
+          <h2 className="text-3xl md:text-5xl font-bold">Para quem é o Neurolit?</h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
+            style={{ willChange: "opacity, transform" }}
+            className="p-8 md:p-12 rounded-3xl border border-brand-lime/30 bg-brand-lime/5 relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-48 h-48 bg-brand-lime/10 blur-[60px] rounded-full pointer-events-none" />
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-lime/20 text-brand-lime text-sm font-mono uppercase tracking-wider mb-8">
+                <span>✓</span> É para você
+              </div>
+              <ul className="space-y-8">
+                {paraQuemE.map((item, i) => (
+                  <li key={i} className="flex gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-lime mt-3 flex-shrink-0" />
+                    <div>
+                      <p className="font-bold text-foreground mb-1">{item.label}</p>
+                      <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.6 }}
+            style={{ willChange: "opacity, transform" }}
+            className="p-8 md:p-12 rounded-3xl border border-destructive/20 bg-destructive/5"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-destructive/10 text-destructive/80 text-sm font-mono uppercase tracking-wider mb-8">
+              <span>✕</span> Não é para você
+            </div>
+            <ul className="space-y-8">
+              {paraQuemNaoE.map((item, i) => (
+                <li key={i} className="flex gap-4">
+                  <div className="w-1.5 h-1.5 rounded-full bg-destructive/50 mt-3 flex-shrink-0" />
+                  <div>
+                    <p className="font-bold text-foreground mb-1">{item.label}</p>
+                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FinalCTA() {
   const prefersReducedMotion = useReducedMotion();
   return (
@@ -482,7 +587,7 @@ function FinalCTA() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
             Para entrar no grupo de networking, você passará por um breve mapeamento de perfil. É aqui que nossa construção começa.
           </p>
-          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-10 py-8 text-xl w-full sm:w-auto mb-6" data-testid="button-final-cta">
+          <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-10 py-8 text-xl w-full sm:w-auto mb-6 cursor-pointer" data-testid="button-final-cta">
             Quero ser um Membro Fundador
           </Button>
           <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
@@ -514,7 +619,7 @@ function FAQ() {
     },
     {
       q: "E se eu não tiver TDAH, mas me identificar?",
-      a: "Então você provavelmente tem algum traço neurodivergente. Muitas pessoas descobrem isso dentro da comunidade. O diagnóstico médico não é pré-requisito para se beneficiar dos métodos."
+      a: "Então você provavelmente tem algum traço de mente não linear. Muitas pessoas descobrem isso dentro da comunidade. O diagnóstico médico não é pré-requisito para se beneficiar dos métodos."
     }
   ];
 
@@ -578,6 +683,7 @@ function LandingPage() {
         <Pillars />
         <ThePlan />
         <Comparison />
+        <ForQuem />
         <FinalCTA />
         <FAQ />
       </main>
