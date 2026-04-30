@@ -673,9 +673,7 @@ function Footer() {
           ))}
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-border text-center md:text-left text-sm text-muted-foreground/60">
-        © 2026 Neurolit · Murillo Bacchi. Todos os direitos reservados.
-      </div>
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-border text-center md:text-left text-sm text-muted-foreground/60">© 2026 Neurolit · Todos os direitos reservados.</div>
     </footer>
   );
 }
