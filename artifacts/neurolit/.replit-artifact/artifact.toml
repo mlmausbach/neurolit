@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Neurolit"
+version = "1.0.0"
+id = "artifacts/neurolit"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19097
+
+[services.development]
+run = "pnpm --filter @workspace/neurolit run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/neurolit", "run", "build" ]
+publicDir = "artifacts/neurolit/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19097"
+BASE_PATH = "/"
