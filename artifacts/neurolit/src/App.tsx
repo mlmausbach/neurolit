@@ -29,6 +29,7 @@ function useIsMobile() {
 }
 
 const NAV_LINKS = [
+  { label: "Início", href: "#hero" },
   { label: "Carta do Fundador", href: "#carta" },
   { label: "Pilares", href: "#pilares" },
   { label: "O Plano", href: "#plano" },
