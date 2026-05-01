@@ -350,8 +350,8 @@ function CartaDoFundador() {
 function Guide() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section className="pt-32 pb-12 px-6 border-t border-border">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-6 border-t border-border scroll-mt-16">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -414,8 +414,8 @@ function Pillars() {
   ];
 
   return (
-    <section id="pilares" className="pb-24 pt-0 px-6 w-full max-w-7xl mx-auto overflow-hidden scroll-mt-16">
-      <div className="grid md:grid-cols-2 gap-6">
+    <section id="pilares" className="py-24 px-6 w-full border-t border-border overflow-hidden scroll-mt-16">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
@@ -491,7 +491,8 @@ function ThePlan() {
 function Comparison() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section id="comparativo" className="py-32 px-6 max-w-6xl mx-auto scroll-mt-16">
+    <section id="comparativo" className="py-32 px-6 border-t border-border scroll-mt-16">
+      <div className="max-w-6xl mx-auto">
       <div className="grid md:grid-cols-2 gap-8">
         <motion.div 
           className="p-8 md:p-12 rounded-3xl border border-destructive/20 bg-destructive/5"
@@ -531,6 +532,7 @@ function Comparison() {
             ))}
           </ul>
         </motion.div>
+      </div>
       </div>
     </section>
   );
@@ -578,7 +580,7 @@ function ForQuem() {
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: prefersReducedMotion ? 0.2 : 0.7 }}
           style={{ willChange: "opacity, transform" }}
-          className="text-center mb-16"
+          className="mb-16"
         >
           <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-4">Clareza antes de começar</div>
           <h2 className="text-3xl md:text-5xl font-bold">Para quem é o Neurolit?</h2>
@@ -644,7 +646,7 @@ function ForQuem() {
 function FinalCTA() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section className="py-32 px-6">
+    <section className="py-32 px-6 border-t border-border scroll-mt-16">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
@@ -698,7 +700,7 @@ function FAQ() {
   return (
     <section id="faq" className="py-32 px-6 bg-card border-t border-border scroll-mt-16">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Perguntas frequentes</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-16">Perguntas frequentes</h2>
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="border-border">
