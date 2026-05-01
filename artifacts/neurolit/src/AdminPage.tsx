@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
-const BASE_URL = import.meta.env.BASE_URL ?? "/";
+const API_ORIGIN = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
 
 type Candidatura = {
   id: number;
@@ -60,8 +60,7 @@ function LoginScreen({ onLogin }: { onLogin: (key: string) => void }) {
     setLoading(true);
     setError(false);
     try {
-      const apiBase = BASE_URL.replace(/\/$/, "");
-      const res = await fetch(`${apiBase}/api/candidaturas`, {
+      const res = await fetch(`${API_ORIGIN}/api/candidaturas`, {
         headers: { Authorization: `Bearer ${value.trim()}` },
       });
       if (res.ok) {
@@ -191,8 +190,7 @@ export default function AdminPage() {
     setLoading(true);
     setFetchError(false);
     try {
-      const apiBase = BASE_URL.replace(/\/$/, "");
-      const res = await fetch(`${apiBase}/api/candidaturas`, {
+      const res = await fetch(`${API_ORIGIN}/api/candidaturas`, {
         headers: { Authorization: `Bearer ${key}` },
       });
       if (!res.ok) throw new Error("unauthorized");
