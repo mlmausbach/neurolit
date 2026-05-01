@@ -205,7 +205,7 @@ function Hero() {
           style={{ willChange: "opacity, transform" }}
         >
           <Link href="/entrar" className="w-full sm:w-auto">
-            <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden cursor-pointer" data-testid="button-hero-cta">
+            <Button id="hero-cta-btn" size="lg" className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-8 py-6 text-lg w-full sm:w-auto group relative overflow-hidden cursor-pointer" data-testid="button-hero-cta">
               <span className="relative z-10 flex items-center gap-2">
                 Quero ser um Membro Fundador
               </span>
@@ -414,7 +414,7 @@ function Pillars() {
   ];
 
   return (
-    <section id="pilares" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-16">
+    <section id="pilares" className="py-24 px-6 w-full max-w-7xl mx-auto overflow-hidden scroll-mt-16">
       <div className="grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
@@ -429,12 +429,12 @@ function Pillars() {
               transition: { duration: 0.25, ease: "easeOut" }
             }}
             style={{ willChange: "opacity, transform" }}
-            className={`${card.color} ${card.text} p-12 md:p-16 rounded-3xl flex flex-col justify-between min-h-[360px] cursor-default`}
+            className={`${card.color} ${card.text} p-6 md:p-12 lg:p-16 rounded-3xl flex flex-col justify-between min-h-[280px] md:min-h-[360px] overflow-hidden cursor-default`}
           >
-            <div className="text-sm font-mono uppercase tracking-widest opacity-80 mb-12">
+            <div className="text-sm font-mono uppercase tracking-widest opacity-80 mb-6 md:mb-12">
               {card.tag}
             </div>
-            <h3 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight break-words">
               {card.body} <span className="italic font-serif font-light">{card.italic}</span>
             </h3>
           </motion.div>
@@ -743,6 +743,21 @@ function Footer() {
 }
 
 function FloatingCTA() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const el = document.getElementById("hero-cta-btn");
+    if (!el) { setShow(true); return; }
+    const observer = new IntersectionObserver(
+      ([entry]) => setShow(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  if (!show) return null;
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/90 backdrop-blur-md border-t border-border md:hidden">
       <Link href="/entrar">
@@ -756,7 +771,7 @@ function FloatingCTA() {
 
 function LandingPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-brand-lime selection:text-[#0C0C0C] font-sans">
+    <div className="min-h-screen bg-background text-foreground selection:bg-brand-lime selection:text-[#0C0C0C] font-sans overflow-x-hidden">
       <Navbar />
       <main className="pb-24 md:pb-0">
         <Hero />
