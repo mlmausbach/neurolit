@@ -775,7 +775,7 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-brand-lime selection:text-[#0C0C0C] font-sans overflow-x-hidden">
       <Navbar />
-      <main className="pb-24 md:pb-0">
+      <main className="md:pb-0 pb-[0px]">
         <Hero />
         <CartaDoFundador />
         <Guide />
