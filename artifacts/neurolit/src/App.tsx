@@ -415,7 +415,11 @@ function Pillars() {
 
   return (
     <section id="pilares" className="py-24 px-6 w-full border-t border-border overflow-hidden scroll-mt-16">
-      <div className="max-w-6xl mx-auto pt-8 grid md:grid-cols-2 gap-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-4">Os Pilares</div>
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">A base do Neurolit</h2>
+        <p className="text-lg text-muted-foreground mb-12 max-w-2xl">Quatro pilares que formam o ecossistema de um negócio construído para mente não linear.</p>
+      <div className="grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
@@ -439,6 +443,7 @@ function Pillars() {
             </h3>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );
@@ -464,7 +469,9 @@ function ThePlan() {
   return (
     <section id="plano" className="py-32 px-6 bg-card border-y border-border scroll-mt-16">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Como funciona</h2>
+        <div className="text-sm font-mono text-brand-lime uppercase tracking-wider mb-4">O Plano</div>
+        <h2 className="text-3xl md:text-5xl font-bold mb-4">Como funciona</h2>
+        <p className="text-lg text-muted-foreground mb-16 max-w-2xl">Três passos para sair do isolamento e construir um negócio que respeita o seu cérebro.</p>
         
         <div className="grid md:grid-cols-3 gap-8">
           {steps.map((step, idx) => (
