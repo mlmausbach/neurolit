@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValue, useSpring, animate, useReducedMotion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 
 import gradientImg from "@assets/Gradiente_Neurolit_1777554171991.png";
@@ -27,24 +28,85 @@ function useIsMobile() {
   return isMobile;
 }
 
+const NAV_LINKS = [
+  { label: "Carta do Fundador", href: "#carta" },
+  { label: "Pilares", href: "#pilares" },
+  { label: "O Plano", href: "#plano" },
+  { label: "Comparativo", href: "#comparativo" },
+  { label: "Para Quem", href: "#para-quem" },
+  { label: "FAQ", href: "#faq" },
+];
+
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleNavClick = (href: string) => {
+    setMenuOpen(false);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-md border-b border-border"
-    >
-      <div className="flex items-center">
-        <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
-        <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
-      </div>
-      <Link href="/entrar">
-        <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6 cursor-pointer" data-testid="button-nav-cta">
-          Quero ser um Membro Fundador
-        </Button>
-      </Link>
-    </motion.header>
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-md border-b border-border"
+      >
+        <div className="flex items-center">
+          <img src={logoHorizontal} alt="Neurolit" className="hidden md:block h-8 w-auto" />
+          <img src={logoVertical} alt="Neurolit" className="block md:hidden h-10 w-auto" />
+        </div>
+
+        <Link href="/entrar" className="hidden md:block">
+          <Button className="bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full px-6 cursor-pointer" data-testid="button-nav-cta">
+            Quero ser um Membro Fundador
+          </Button>
+        </Link>
+
+        <button
+          className="block md:hidden p-2 rounded-lg text-foreground hover:bg-foreground/10 transition-colors"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.28, ease: "easeInOut" }}
+            className="fixed inset-0 z-40 bg-background/97 backdrop-blur-md flex flex-col pt-20 px-6 md:hidden"
+          >
+            <nav className="flex flex-col gap-1 mt-8">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  className="text-left text-2xl font-semibold py-4 border-b border-border text-foreground hover:text-brand-lime transition-colors tracking-tight"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </nav>
+
+            <div className="mt-auto mb-10">
+              <Link href="/entrar" onClick={() => setMenuOpen(false)}>
+                <Button size="lg" className="w-full bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full py-6 text-lg cursor-pointer">
+                  Quero ser um Membro Fundador
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -87,7 +149,7 @@ function Hero() {
     : { duration: 0.7, ease: "easeOut" };
 
   return (
-    <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-center pt-24 px-6 overflow-hidden">
+    <section id="hero" ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-center pt-24 px-6 overflow-hidden scroll-mt-16">
       {/* Parallax background gradient – disabled on mobile to prevent layout thrash */}
       <motion.div
         style={disableParallax ? {} : { y: bgY, opacity: bgOpacity, willChange: "transform, opacity" }}
@@ -260,7 +322,7 @@ function CartaLine({ line, index }: { line: typeof cartaLines[0]; index: number 
 function CartaDoFundador() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section className="py-32 px-6 bg-card relative">
+    <section id="carta" className="py-32 px-6 bg-card relative scroll-mt-16">
       <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
@@ -350,7 +412,7 @@ function Pillars() {
   ];
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="pilares" className="py-24 px-6 max-w-7xl mx-auto scroll-mt-16">
       <div className="grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
@@ -398,7 +460,7 @@ function ThePlan() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-card border-y border-border">
+    <section id="plano" className="py-32 px-6 bg-card border-y border-border scroll-mt-16">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Como funciona</h2>
         
@@ -427,7 +489,7 @@ function ThePlan() {
 function Comparison() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section className="py-32 px-6 max-w-6xl mx-auto">
+    <section id="comparativo" className="py-32 px-6 max-w-6xl mx-auto scroll-mt-16">
       <div className="grid md:grid-cols-2 gap-8">
         <motion.div 
           className="p-8 md:p-12 rounded-3xl border border-destructive/20 bg-destructive/5"
@@ -506,7 +568,7 @@ function ForQuem() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-card border-t border-border">
+    <section id="para-quem" className="py-32 px-6 bg-card border-t border-border scroll-mt-16">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
@@ -632,7 +694,7 @@ function FAQ() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-card border-t border-border">
+    <section id="faq" className="py-32 px-6 bg-card border-t border-border scroll-mt-16">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">Perguntas frequentes</h2>
         <Accordion type="single" collapsible className="w-full">
@@ -678,11 +740,23 @@ function Footer() {
   );
 }
 
+function FloatingCTA() {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/90 backdrop-blur-md border-t border-border md:hidden">
+      <Link href="/entrar">
+        <Button size="lg" className="w-full bg-foreground text-background hover:bg-foreground/90 font-medium tracking-tight rounded-full py-6 text-base cursor-pointer">
+          Quero ser um Membro Fundador
+        </Button>
+      </Link>
+    </div>
+  );
+}
+
 function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-brand-lime selection:text-[#0C0C0C] font-sans">
       <Navbar />
-      <main>
+      <main className="pb-24 md:pb-0">
         <Hero />
         <CartaDoFundador />
         <Guide />
@@ -694,6 +768,7 @@ function LandingPage() {
         <FAQ />
       </main>
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }
