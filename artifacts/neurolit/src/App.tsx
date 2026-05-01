@@ -415,7 +415,7 @@ function Pillars() {
 
   return (
     <section id="pilares" className="py-24 px-6 w-full border-t border-border overflow-hidden scroll-mt-16">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+      <div className="max-w-6xl mx-auto pt-8 grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
@@ -647,7 +647,7 @@ function FinalCTA() {
   const prefersReducedMotion = useReducedMotion();
   return (
     <section className="py-32 px-6 border-t border-border scroll-mt-16">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
