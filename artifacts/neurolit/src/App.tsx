@@ -350,7 +350,7 @@ function CartaDoFundador() {
 function Guide() {
   const prefersReducedMotion = useReducedMotion();
   return (
-    <section className="py-32 px-6 border-t border-border">
+    <section className="pt-32 pb-12 px-6 border-t border-border">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 40 }}
@@ -414,7 +414,7 @@ function Pillars() {
   ];
 
   return (
-    <section id="pilares" className="py-24 px-6 w-full max-w-7xl mx-auto overflow-hidden scroll-mt-16">
+    <section id="pilares" className="pb-24 pt-0 px-6 w-full max-w-7xl mx-auto overflow-hidden scroll-mt-16">
       <div className="grid md:grid-cols-2 gap-6">
         {cards.map((card, idx) => (
           <motion.div
