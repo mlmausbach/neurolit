@@ -87,13 +87,14 @@ function Navbar() {
           >
             <nav className="flex flex-col gap-1 mt-8">
               {NAV_LINKS.map((link) => (
-                <button
+                <a
                   key={link.href}
-                  onClick={() => handleNavClick(link.href)}
+                  href={link.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                   className="text-left text-2xl font-semibold py-4 border-b border-border text-foreground hover:text-brand-lime transition-colors tracking-tight"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
             </nav>
 
