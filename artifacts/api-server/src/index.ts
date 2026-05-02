@@ -1,8 +1,4 @@
 import app from "./app";
-import { logger } from "./lib/logger";
 
-/**
- * No Cloudflare Workers, não usamos app.listen().
- * Exportamos o app diretamente para que o Cloudflare gerencie o tráfego.
- */
+// Exportação padrão para o Cloudflare Workers/Pages Functions
 export default app;
